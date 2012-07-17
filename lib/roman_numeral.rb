@@ -1,14 +1,24 @@
 class RomanNumeral
-  def self.convert(num)
-    rom_num = String.new
-    if num >= 5
-      rom_num <<'V'
-      num -= 5
+  MAPPINGS = {
+    100 => 'C',
+    50 => 'L',
+    40 => 'XL',
+    10 => 'X',
+    9 => 'IX',
+    5 => 'V',
+    4 => 'IV',
+    1 => 'I'
+  }
+  
+  def self.convert(input)
+    output = ''
+    MAPPINGS.inject do |arabic, roman|
+      while input >= arabic
+        output << roman
+        input = input - arabic
+      end
     end
-    
-    num.times do
-      rom_num << 'I'
-    end
-    rom_num
+    output
   end
+  
 end 
